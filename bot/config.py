@@ -20,8 +20,8 @@ FEEDS = {
         "hashtag": "#وال_استریت_جورنال",
         "source_text": "وال استریت ژورنال  🇺🇸  "
     },
-    "WSJ_Politics": {
-        "url": "https://feeds.a.dj.com/rss/WSJcomUSPolitics.xml",
+    "WSJ_Business": {
+        "url": "https://feeds.a.dj.com/rss/WSJcomUSBusiness.xml",
         "hashtag": "#وال_استریت_جورنال",
         "source_text": "وال استریت ژورنال  🇺🇸  "
     }
