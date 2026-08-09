@@ -24,5 +24,10 @@ FEEDS = {
         "url": "https://feeds.a.dj.com/rss/WSJcomUSBusiness.xml",
         "hashtag": "#وال_استریت_جورنال",
         "source_text": "وال استریت ژورنال  🇺🇸  "
+    },
+    "WSJ_SiteStream": {
+        "url": "https://news.google.com/rss/search?q=site:wsj.com+(iran+OR+us+OR+trump)&hl=en-US&gl=US&ceid=US:en",
+        "hashtag": "#وال_استریت_جورنال",
+        "source_text": "وال استریت ژورنال  🇺🇸  "
     }
 }
