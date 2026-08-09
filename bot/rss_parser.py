@@ -1,6 +1,13 @@
 import feedparser
+import requests
 import re
+import logging
 from .config import TARGET_KEYWORDS
+
+# Custom headers to bypass WSJ anti-bot/403 blocks
+HEADERS = {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+}
 
 def matches_keywords(text: str) -> bool:
     if not text:
@@ -9,8 +16,19 @@ def matches_keywords(text: str) -> bool:
     return bool(pattern.search(text))
 
 def fetch_latest_news(feed_url: str) -> list:
-    feed = feedparser.parse(feed_url)
     filtered_articles = []
+    
+    try:
+        # Fetch RSS feed with Browser User-Agent
+        response = requests.get(feed_url, headers=HEADERS, timeout=15)
+        response.raise_for_status()
+        feed = feedparser.parse(response.content)
+    except Exception as e:
+        logging.error(f"Failed to fetch RSS feed from {feed_url}: {e}")
+        return []
+
+    if not feed.entries:
+        logging.warning(f"No entries found for feed: {feed_url}")
 
     for entry in feed.entries:
         title = entry.get("title", "")
