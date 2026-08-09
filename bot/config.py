@@ -12,14 +12,17 @@ TARGET_KEYWORDS = [
 FEEDS = {
     "AlJazeera": {
         "url": "https://www.aljazeera.com/xml/rss/all.xml",
-        "hashtag": "#الجزیره"
+        "hashtag": "#الجزیره",
+        "source_text": "الجــزیــره 🇶🇦"
     },
     "WSJ_World": {
-        "url": "https://feeds.a1.wsj.net/xml/rss/3_7085.xml",
-        "hashtag": "#وال_استریت_جورنال"
+        "url": "https://feeds.a.dj.com/rss/RSSWorldNews.xml",
+        "hashtag": "#وال_استریت_جورنال",
+        "source_text": "وال استریت ژورنال  🇺🇸  "
     },
-    "WSJ_US": {
-        "url": "https://feeds.a1.wsj.net/xml/rss/3_7014.xml",
-        "hashtag": "#وال_استریت_جورنال"
+    "WSJ_Politics": {
+        "url": "https://feeds.a.dj.com/rss/WSJcomUSPolitics.xml",
+        "hashtag": "#وال_استریت_جورنال",
+        "source_text": "وال استریت ژورنال  🇺🇸  "
     }
 }
