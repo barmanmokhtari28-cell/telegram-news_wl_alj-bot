@@ -17,7 +17,7 @@ logging.basicConfig(
 
 async def run_once():
     if not TELEGRAM_BOT_TOKEN or not TELEGRAM_CHANNEL_ID:
-        logging.error("TELEGRAM_BOT_TOKEN or TELEGRAM_CHANNEL_ID environment variable is missing.")
+        logging.error("TELEGRAM_BOT_TOKEN or TELEGRAM_CHANNEL_ID missing.")
         return
 
     init_db()
@@ -42,7 +42,8 @@ async def run_once():
                 title_fa=title_fa,
                 body_fa=summary_fa,
                 link=link,
-                hashtag=data["hashtag"]
+                hashtag=data["hashtag"],
+                source_text=data["source_text"]
             )
 
             try:
