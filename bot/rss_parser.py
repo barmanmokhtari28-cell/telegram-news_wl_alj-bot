@@ -13,11 +13,11 @@ def matches_keywords(text: str) -> bool:
     pattern = re.compile(r'\b(' + '|'.join([re.escape(k) for k in TARGET_KEYWORDS]) + r')\b', re.IGNORECASE)
     return bool(pattern.search(text))
 
-def is_recent_article(entry, max_hours=24) -> bool:
-    """Discards articles published older than max_hours (24 hours)."""
+def is_recent_article(entry, max_hours=48) -> bool:
+    """Discards articles published older than 48 hours."""
     pub_struct = entry.get("published_parsed") or entry.get("updated_parsed")
     if not pub_struct:
-        return True  # Keep article if no pubDate tag exists
+        return True
 
     try:
         pub_time_utc = datetime.fromtimestamp(calendar.timegm(pub_struct), tz=timezone.utc)
