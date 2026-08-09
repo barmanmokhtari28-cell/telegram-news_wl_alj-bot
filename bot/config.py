@@ -9,6 +9,7 @@ TARGET_KEYWORDS = [
     "trump", "donald trump"
 ]
 
+# Direct feeds straight from outlet servers
 FEEDS = {
     "AlJazeera": {
         "url": "https://www.aljazeera.com/xml/rss/all.xml",
@@ -25,8 +26,8 @@ FEEDS = {
         "hashtag": "#وال_استریت_جورنال",
         "source_text": "وال استریت ژورنال  🇺🇸  "
     },
-    "WSJ_SiteStream": {
-        "url": "https://news.google.com/rss/search?q=site:wsj.com+(iran+OR+us+OR+trump)&hl=en-US&gl=US&ceid=US:en",
+    "WSJ_Opinion": {
+        "url": "https://feeds.a.dj.com/rss/RSSOpinion.xml",
         "hashtag": "#وال_استریت_جورنال",
         "source_text": "وال استریت ژورنال  🇺🇸  "
     }
