@@ -10,28 +10,44 @@ def format_caption(title_fa: str, body_fa: str, link: str, hashtag: str, source_
     clean_title = clean_html(title_fa)
     clean_body = clean_html(body_fa)
     
-    has_valid_summary = clean_body and (clean_body.strip().lower() != clean_title.strip().lower())
+    # Check if this post is from The Wall Street Journal
+    is_wsj = "#وال_استریت_جورنال" in hashtag
 
-    # Telegram API limits: 1024 characters for video captions, 4096 for text messages
+    # For WSJ: If summary is empty, use the translated title as the body text inside the blockquote
+    if is_wsj and not clean_body:
+        clean_body = clean_title
+
+    # Telegram caption character limits
     max_body_length = 750 if is_video else 3200
-
     if len(clean_body) > max_body_length:
         clean_body = clean_body[:max_body_length - 3] + "..."
 
-    if has_valid_summary:
+    # 1. Formatting for Wall Street Journal (NO title line at the top)
+    if is_wsj:
         caption = (
-            f"<b>{clean_title}</b>\n\n"
             f"<blockquote expandable>{clean_body}</blockquote>\n\n"
             f"<a href=\"{link}\">{source_text}</a>\n\n"
             f"📰 @secretollah\n"
             f"{hashtag}"
         )
+
+    # 2. Formatting for Al Jazeera (Keeps title at the top)
     else:
-        caption = (
-            f"<b>{clean_title}</b>\n\n"
-            f"<a href=\"{link}\">{source_text}</a>\n\n"
-            f"📰 @secretollah\n"
-            f"{hashtag}"
-        )
+        has_distinct_summary = clean_body and (clean_body.strip().lower() != clean_title.strip().lower())
+        if has_distinct_summary:
+            caption = (
+                f"<b>{clean_title}</b>\n\n"
+                f"<blockquote expandable>{clean_body}</blockquote>\n\n"
+                f"<a href=\"{link}\">{source_text}</a>\n\n"
+                f"📰 @secretollah\n"
+                f"{hashtag}"
+            )
+        else:
+            caption = (
+                f"<b>{clean_title}</b>\n\n"
+                f"<a href=\"{link}\">{source_text}</a>\n\n"
+                f"📰 @secretollah\n"
+                f"{hashtag}"
+            )
 
     return caption
