@@ -33,6 +33,7 @@ async def run_once():
             link = article["link"]
             
             if is_article_posted(link):
+                logging.info(f"Skipping already posted article: {article['title']}")
                 continue
 
             logging.info(f"New relevant article found from {source}: {article['title']}")
@@ -40,7 +41,6 @@ async def run_once():
             title_fa = translate_to_persian(article["title"])
             summary_fa = translate_to_persian(article["summary"])
 
-            # Detect video articles (e.g. Al Jazeera clips containing /video/)
             is_video_link = "/video/" in link or "video" in article["title"].lower()
             video_path = None
 
@@ -50,7 +50,6 @@ async def run_once():
 
             posted_successfully = False
 
-            # 1. Send as Video if available
             if video_path and os.path.exists(video_path):
                 formatted_video_message = format_caption(
                     title_fa=title_fa,
@@ -79,7 +78,6 @@ async def run_once():
                         except Exception:
                             pass
 
-            # 2. Fallback to standard text message if video unavailable or failed
             if not posted_successfully:
                 formatted_text_message = format_caption(
                     title_fa=title_fa,
